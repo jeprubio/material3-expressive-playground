@@ -28,7 +28,7 @@ class MainActivity : ComponentActivity() {
                                 onLoadingIndicatorSelected = { navController.navigate(Route.LoadingIndicators) },
                                 onSplitButtonSelected = { navController.navigate(Route.SplitButtons) },
                                 onFloatingActionButtonSelected = { navController.navigate(Route.FloatingActionButtonMenu) },
-                                onButtonGroupButtonSelected = { navController.navigate(Route.ButtonGroup) }
+                                onButtonGroupSelected = { navController.navigate(Route.ButtonGroup) },
                             )
                         }
                         composable<Route.LoadingIndicators> { LoadingIndicatorsScreen() }
