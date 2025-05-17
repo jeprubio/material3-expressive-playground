@@ -28,6 +28,7 @@ class MainActivity : ComponentActivity() {
                 val navController = rememberNavController()
                 var navigateToLoadings by rememberSaveable { mutableStateOf(false) }
                 var navigateToSplitButton by rememberSaveable { mutableStateOf(false) }
+                var navigateToFloatingActionButton by rememberSaveable { mutableStateOf(false) }
                 LaunchedEffect(navigateToLoadings) {
                     if (navigateToLoadings) {
                         navController.navigate(Route.LoadingIndicators)
@@ -40,17 +41,26 @@ class MainActivity : ComponentActivity() {
                         navigateToSplitButton = false
                     }
                 }
+                LaunchedEffect(navigateToFloatingActionButton) {
+                    if (navigateToFloatingActionButton) {
+                        navController.navigate(Route.FloatingActionButtonMenu)
+                        navigateToFloatingActionButton = false
+                    }
+                }
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
                     NavHost(navController, startDestination = Route.Home, Modifier.padding(innerPadding)) {
                         composable<Route.Home> {
                             HomeScreen(
                                 onLoadingIndicatorSelected = { navigateToLoadings = true },
-                                onSplitButtonSelected = { navigateToSplitButton = true }
+                                onSplitButtonSelected = { navigateToSplitButton = true },
+                                onFloatingActionButtonSelected = { navController.navigate(Route.FloatingActionButtonMenu) }
                             )
                         }
                         composable<Route.LoadingIndicators> { LoadingIndicatorsScreen() }
 
-                        composable<Route.SplitButtons> { FilledSplitButton() }
+                        composable<Route.SplitButtons> { SplitButtonsScreen() }
+
+                        composable<Route.FloatingActionButtonMenu> { FloatingActionButtonMenuScreen() }
                     }
                 }
             }
@@ -68,4 +78,7 @@ sealed class Route {
 
     @Serializable
     data object SplitButtons : Route()
+
+    @Serializable
+    data object FloatingActionButtonMenu : Route()
 }
