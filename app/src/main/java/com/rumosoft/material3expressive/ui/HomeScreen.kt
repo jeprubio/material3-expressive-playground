@@ -19,6 +19,7 @@ fun HomeScreen(
     onLoadingIndicatorSelected: () -> Unit = {},
     onSplitButtonSelected: () -> Unit = {},
     onFloatingActionButtonSelected: () -> Unit = {},
+    onButtonGroupButtonSelected: () -> Unit = {},
 ) {
     LazyColumn(
         horizontalAlignment = Alignment.CenterHorizontally,
@@ -40,6 +41,11 @@ fun HomeScreen(
         item {
             Button(onClick = { onFloatingActionButtonSelected() }) {
                 Text(text = "FloatingActionButton")
+            }
+        }
+        item {
+            Button(onClick = { onButtonGroupButtonSelected() }) {
+                Text(text = "ButtonGroup")
             }
         }
     }

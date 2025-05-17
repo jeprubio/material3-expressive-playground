@@ -7,11 +7,6 @@ import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
-import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.saveable.rememberSaveable
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
@@ -26,34 +21,14 @@ class MainActivity : ComponentActivity() {
         setContent {
             Material3ExpressiveTheme {
                 val navController = rememberNavController()
-                var navigateToLoadings by rememberSaveable { mutableStateOf(false) }
-                var navigateToSplitButton by rememberSaveable { mutableStateOf(false) }
-                var navigateToFloatingActionButton by rememberSaveable { mutableStateOf(false) }
-                LaunchedEffect(navigateToLoadings) {
-                    if (navigateToLoadings) {
-                        navController.navigate(Route.LoadingIndicators)
-                        navigateToLoadings = false
-                    }
-                }
-                LaunchedEffect(navigateToSplitButton) {
-                    if (navigateToSplitButton) {
-                        navController.navigate(Route.SplitButtons)
-                        navigateToSplitButton = false
-                    }
-                }
-                LaunchedEffect(navigateToFloatingActionButton) {
-                    if (navigateToFloatingActionButton) {
-                        navController.navigate(Route.FloatingActionButtonMenu)
-                        navigateToFloatingActionButton = false
-                    }
-                }
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
                     NavHost(navController, startDestination = Route.Home, Modifier.padding(innerPadding)) {
                         composable<Route.Home> {
                             HomeScreen(
-                                onLoadingIndicatorSelected = { navigateToLoadings = true },
-                                onSplitButtonSelected = { navigateToSplitButton = true },
-                                onFloatingActionButtonSelected = { navController.navigate(Route.FloatingActionButtonMenu) }
+                                onLoadingIndicatorSelected = { navController.navigate(Route.LoadingIndicators) },
+                                onSplitButtonSelected = { navController.navigate(Route.SplitButtons) },
+                                onFloatingActionButtonSelected = { navController.navigate(Route.FloatingActionButtonMenu) },
+                                onButtonGroupButtonSelected = { navController.navigate(Route.ButtonGroup) }
                             )
                         }
                         composable<Route.LoadingIndicators> { LoadingIndicatorsScreen() }
@@ -61,6 +36,8 @@ class MainActivity : ComponentActivity() {
                         composable<Route.SplitButtons> { SplitButtonsScreen() }
 
                         composable<Route.FloatingActionButtonMenu> { FloatingActionButtonMenuScreen() }
+
+                        composable<Route.ButtonGroup> { ButtonGroupScreen() }
                     }
                 }
             }
@@ -81,4 +58,7 @@ sealed class Route {
 
     @Serializable
     data object FloatingActionButtonMenu : Route()
+
+    @Serializable
+    data object ButtonGroup : Route()
 }
