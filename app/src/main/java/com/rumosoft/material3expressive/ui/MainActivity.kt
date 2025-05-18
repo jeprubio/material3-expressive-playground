@@ -31,6 +31,7 @@ class MainActivity : ComponentActivity() {
                                 onButtonGroupSelected = { navController.navigate(Route.ButtonGroup) },
                                 onVerticalFloatingToolbarSelected = { navController.navigate(Route.VerticalFloatingToolbar) },
                                 onHorizontalFloatingToolbarSelected = { navController.navigate(Route.HorizontalFloatingToolbar) },
+                                onFlexibleBottomAppBarSelected = { navController.navigate(Route.FlexibleBottomAppBar) },
                             )
                         }
                         composable<Route.LoadingIndicators> { LoadingIndicatorsScreen() }
@@ -44,6 +45,8 @@ class MainActivity : ComponentActivity() {
                         composable<Route.VerticalFloatingToolbar> { VerticalFloatingToolbarScreen() }
 
                         composable<Route.HorizontalFloatingToolbar> { HorizontalFloatingToolbarScreen() }
+
+                        composable<Route.FlexibleBottomAppBar> { FlexibleBottomAppBarScreen() }
                     }
                 }
             }
@@ -73,4 +76,7 @@ sealed class Route {
 
     @Serializable
     data object HorizontalFloatingToolbar : Route()
+
+    @Serializable
+    data object FlexibleBottomAppBar : Route()
 }

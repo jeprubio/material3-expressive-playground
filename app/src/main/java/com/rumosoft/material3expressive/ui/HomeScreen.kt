@@ -44,6 +44,7 @@ fun HomeScreen(
     onButtonGroupSelected: () -> Unit = {},
     onVerticalFloatingToolbarSelected: () -> Unit = {},
     onHorizontalFloatingToolbarSelected: () -> Unit = {},
+    onFlexibleBottomAppBarSelected: () -> Unit = {},
 ) {
     LazyColumn(
         horizontalAlignment = Alignment.CenterHorizontally,
@@ -80,6 +81,12 @@ fun HomeScreen(
             ToolbarSelectionSection(
                 onVerticalFloatingToolbarSelected,
                 onHorizontalFloatingToolbarSelected,
+            )
+        }
+        item {
+            OptionButton(
+                text = "FlexibleBottomAppBar",
+                onClick = onFlexibleBottomAppBarSelected,
             )
         }
     }
