@@ -29,20 +29,21 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 
-@Preview(showBackground = true)
 @Composable
-fun ToolbarScreen() {
+fun VerticalFloatingToolbarScreen() {
     OverflowingVerticalFloatingToolbarSample()
 }
 
 @OptIn(ExperimentalMaterial3ExpressiveApi::class)
-@Preview
+@Preview(showBackground = true)
 @Composable
-fun OverflowingVerticalFloatingToolbarSample() {
+private fun OverflowingVerticalFloatingToolbarSample(
+    modifier: Modifier = Modifier,
+) {
     Scaffold(
+        modifier = modifier.padding(16.dp)
     ) { innerPadding ->
         Box(Modifier.fillMaxSize().padding(innerPadding)) {
-            // Content
             LazyColumn(
                 state = rememberLazyListState(),
                 contentPadding = innerPadding,

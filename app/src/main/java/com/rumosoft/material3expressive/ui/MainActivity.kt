@@ -29,7 +29,8 @@ class MainActivity : ComponentActivity() {
                                 onSplitButtonSelected = { navController.navigate(Route.SplitButtons) },
                                 onFloatingActionButtonSelected = { navController.navigate(Route.FloatingActionButtonMenu) },
                                 onButtonGroupSelected = { navController.navigate(Route.ButtonGroup) },
-                                onToolbarSelected = { navController.navigate(Route.Toolbar) }
+                                onVerticalFloatingToolbarSelected = { navController.navigate(Route.VerticalFloatingToolbar) },
+                                onHorizontalFloatingToolbarSelected = { navController.navigate(Route.HorizontalFloatingToolbar) },
                             )
                         }
                         composable<Route.LoadingIndicators> { LoadingIndicatorsScreen() }
@@ -40,7 +41,9 @@ class MainActivity : ComponentActivity() {
 
                         composable<Route.ButtonGroup> { ButtonGroupScreen() }
 
-                        composable<Route.Toolbar> { ToolbarScreen() }
+                        composable<Route.VerticalFloatingToolbar> { VerticalFloatingToolbarScreen() }
+
+                        composable<Route.HorizontalFloatingToolbar> { HorizontalFloatingToolbarScreen() }
                     }
                 }
             }
@@ -66,5 +69,8 @@ sealed class Route {
     data object ButtonGroup : Route()
 
     @Serializable
-    data object Toolbar : Route()
+    data object VerticalFloatingToolbar : Route()
+
+    @Serializable
+    data object HorizontalFloatingToolbar : Route()
 }
